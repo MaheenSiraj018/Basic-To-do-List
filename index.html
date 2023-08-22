@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <style>
+        .main {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        body {
+            background-color: blueviolet;
+            color: azure;
+            text-align: center;
+        }
+
+        .todoitems {
+            text-align: center;
+            border-bottom: 2px solid black;
+            height: 40px;
+            padding: 10px;
+            background-color: gray;
+        }
+
+        .first {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div id="first">
+            <h1 id="header">To do List</h1>
+            <input placeholder="Enter title" id="title">
+            <button type="submit" onclick="adddisplay()">Add an item</button>
+        </div>
+        <div id="items"></div>
+    </div>
+    <script>
+        var todolist = new Array();
+        function additem() {
+            var task = document.getElementById('title').value;
+            todolist.push(task);
+        }
+        function display() {
+            clear();
+            var task = document.getElementById('title').value;
+            const items = document.getElementById('items');
+            const creatediv = (task, index) => {
+                const div = document.createElement('div');
+                div.classList.add('todoitems');
+                div.style.display = 'flex';
+                div.style.flexDirection = 'row';
+                div.style.alignItems = 'center';
+                div.style.justifyContent = 'space-between';
+                div.style.width = '75vw';
+                div.style.alignSelf = 'center';
+                const li = document.createElement('h5');
+                li.style.fontSize = '20px';
+                li.style.fontWeight = '100';
+                li.textContent = task;
+                const button = document.createElement('button');
+                button.textContent = 'Remove Task';
+                button.addEventListener('click', () => removeitem(index));
+                div.appendChild(li);
+                div.appendChild(button);
+                items.appendChild(div);
+
+            }
+            todolist.forEach(func = (task, index) => {
+                creatediv(task, index);
+            });
+        }
+        function removeitem(index) {
+            todolist.splice(index, 1);
+            console.log(todolist);
+            display();
+        }
+        function adddisplay() {
+            additem();
+            display();
+        }
+        function clear() {
+            document.getElementById('items').innerHTML = "";
+        }
+    </script>
+</body>
+</html>
