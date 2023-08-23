@@ -1,9 +1,13 @@
 var todolist = new Array();
+
+//function to add task in the list
 function additem() {
     var task = document.getElementById('title').value;
     todolist.push(task);
     console.log(todolist);
 }
+
+//function to display the list of tasks
 function display() {
     clear();
     var task = document.getElementById('title').value;
@@ -38,22 +42,28 @@ function display() {
         creatediv(task, index);
     });
 }
+
+//function to remove a task from the list
 function removeitem(index) {
     todolist.splice(index, 1);
     console.log(todolist);
     display();
 }
+
+//function to be called on click by the user
 function adddisplay() {
     additem();
     display();
 }
+
+//function used to clear the div of tasks 
 function clear() {
     document.getElementById('items').innerHTML = "";
 }
 
+//function used to edit the task
 function edititem(index){
     var editedtask = prompt("Edit task");
     todolist[index]= editedtask;
     display();
-
 }
